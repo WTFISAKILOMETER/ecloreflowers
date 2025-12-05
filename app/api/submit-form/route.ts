@@ -23,6 +23,13 @@ export async function POST(request: NextRequest) {
       day: 'numeric',
     })
 
+    // Get current timestamp
+    const timestamp = new Date().toLocaleString('en-US', {
+      timeZone: 'America/New_York',
+      dateStyle: 'short',
+      timeStyle: 'short',
+    })
+
     // Get phone number and carrier from env
     const phoneNumber = process.env.YOUR_PHONE_NUMBER
     const carrier = process.env.YOUR_CARRIER
@@ -61,7 +68,7 @@ export async function POST(request: NextRequest) {
       from: fromEmail,
       to: recipients,
       subject: 'New Order - Eclore',
-      text: `New order from ${name}!\n\nPhone: ${phone}\nDate Desired: ${formattedDate}\nProduct: ${productTitle}\nPrice: ${productPrice}\n\nReply ASAP!`,
+      text: `New Order Received\n\nName: ${name}\nPhone: ${phone}\nDate Desired: ${formattedDate}\nProduct: ${productTitle}\nPrice: ${productPrice}\n\nSubmitted: ${timestamp}`,
     })
 
     console.log('Resend response:', result)
