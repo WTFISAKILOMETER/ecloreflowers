@@ -304,7 +304,6 @@ export function ProductModal({ product, open, onOpenChange }: ProductModalProps)
                   maxLength={14} // (XXX) XXX-XXXX = 14 characters
                   className="w-full px-4 py-3 rounded-full border border-white/20 bg-white/60 backdrop-blur-sm text-black placeholder:text-black/40 focus:outline-none focus:ring-2 focus:ring-[#f9abb9]/50 transition-all"
                   placeholder="(555) 123-4567"
-                  pattern="[0-9]{10}"
                   autoComplete="tel"
                 />
                 {formData.phone && getPhoneDigits(formData.phone).length !== 10 && (
