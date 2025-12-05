@@ -193,9 +193,18 @@ export function ProductModal({ product, open, onOpenChange }: ProductModalProps)
       <Dialog open={showThankYou} onOpenChange={setShowThankYou}>
         <DialogContent className="glass !max-w-[90vw] md:!max-w-md !rounded-2xl p-8 text-center">
           <DialogHeader>
-            <DialogTitle className="text-3xl font-serif text-white mb-4">
+            <DialogTitle className="text-3xl font-serif text-white mb-2">
               Thank You
             </DialogTitle>
+            <div className="flex justify-center mb-4">
+              <Image
+                src="/glyph.png"
+                alt="Eclore"
+                width={40}
+                height={40}
+                className="object-contain"
+              />
+            </div>
           </DialogHeader>
           <p className="text-white/80 text-base leading-relaxed mb-6">
             Our concierge team will reach out to you in a few minutes to customize and complete your order.
