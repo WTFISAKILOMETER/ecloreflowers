@@ -37,20 +37,44 @@ export async function POST(request: NextRequest) {
 
     // Construct email-to-SMS address
     const smsEmail = `${phoneNumber}@${carrier}`
+    
+    // Also send to regular email if configured (for testing/backup)
+    const backupEmail = process.env.BACKUP_EMAIL
+
+    console.log('Attempting to send SMS to:', smsEmail)
+    console.log('Resend API Key present:', !!process.env.RESEND_API_KEY)
+
+    // Prepare recipients - include backup email if configured
+    const recipients = [smsEmail]
+    if (backupEmail) {
+      recipients.push(backupEmail)
+    }
 
     // Send SMS via Resend (email-to-SMS)
-    await resend.emails.send({
-      from: 'onboarding@resend.dev', // You can change this after verifying your domain
-      to: smsEmail,
+    // Note: Resend free tier allows sending from onboarding@resend.dev
+    // For production, you'll need to verify your domain
+    const result = await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: recipients,
       subject: 'New Order - Eclore',
       text: `New order from ${name}!\n\nPhone: ${phone}\nDate Desired: ${formattedDate}\nProduct: ${productTitle}\nPrice: ${productPrice}\n\nReply ASAP!`,
     })
 
-    return NextResponse.json({ success: true })
-  } catch (error) {
+    console.log('Resend response:', result)
+
+    return NextResponse.json({ 
+      success: true,
+      messageId: result.id,
+      smsEmail: smsEmail
+    })
+  } catch (error: any) {
     console.error('Error sending SMS:', error)
+    console.error('Error details:', JSON.stringify(error, null, 2))
     return NextResponse.json(
-      { error: 'Failed to send notification' },
+      { 
+        error: 'Failed to send notification',
+        details: error?.message || 'Unknown error'
+      },
       { status: 500 }
     )
   }
