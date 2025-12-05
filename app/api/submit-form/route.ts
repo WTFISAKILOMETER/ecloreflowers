@@ -30,20 +30,16 @@ export async function POST(request: NextRequest) {
       timeStyle: 'short',
     })
 
-    // Get phone number and carrier from env
-    const phoneNumber = process.env.YOUR_PHONE_NUMBER
-    const carrier = process.env.YOUR_CARRIER
+    // Get SMS email address from env (email-to-SMS address)
+    const smsEmail = process.env.SMS_EMAIL
 
-    if (!phoneNumber || !carrier) {
-      console.error('Phone number or carrier not configured')
+    if (!smsEmail) {
+      console.error('SMS email address not configured')
       return NextResponse.json(
         { error: 'SMS configuration missing' },
         { status: 500 }
       )
     }
-
-    // Construct email-to-SMS address
-    const smsEmail = `${phoneNumber}@${carrier}`
     
     // Also send to regular email if configured (for testing/backup)
     const backupEmail = process.env.BACKUP_EMAIL
