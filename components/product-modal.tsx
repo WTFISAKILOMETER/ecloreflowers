@@ -32,6 +32,8 @@ export function ProductModal({ product, open, onOpenChange }: ProductModalProps)
     dateDesired: undefined as Date | undefined,
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showThankYou, setShowThankYou] = useState(false)
+  const [datePickerOpen, setDatePickerOpen] = useState(false)
   const formContainerRef = useRef<HTMLDivElement>(null)
   const nameInputRef = useRef<HTMLInputElement>(null)
   const phoneInputRef = useRef<HTMLInputElement>(null)
@@ -161,9 +163,8 @@ export function ProductModal({ product, open, onOpenChange }: ProductModalProps)
       })
 
       if (response.ok) {
-        // Success - close modal and reset form
-        onOpenChange(false)
-        setFormData({ name: "", phone: "", dateDesired: undefined })
+        // Success - show thank you modal
+        setShowThankYou(true)
       } else {
         // Handle error
         const error = await response.json()
@@ -178,10 +179,38 @@ export function ProductModal({ product, open, onOpenChange }: ProductModalProps)
     }
   }
 
+  const handleDone = () => {
+    setShowThankYou(false)
+    onOpenChange(false)
+    setFormData({ name: "", phone: "", dateDesired: undefined })
+  }
+
   if (!product) return null
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <>
+      {/* Thank You Modal */}
+      <Dialog open={showThankYou} onOpenChange={setShowThankYou}>
+        <DialogContent className="glass !max-w-[90vw] md:!max-w-md !rounded-2xl p-8 text-center">
+          <DialogHeader>
+            <DialogTitle className="text-3xl font-serif text-white mb-4">
+              Thank You
+            </DialogTitle>
+          </DialogHeader>
+          <p className="text-white/80 text-base leading-relaxed mb-6">
+            Our concierge team will reach out to you in a few minutes to customize and complete your order.
+          </p>
+          <button
+            onClick={handleDone}
+            className="w-full px-8 py-3 bg-[#f9abb9] hover:bg-[#f9abb9]/90 text-black rounded-full font-medium transition-colors"
+          >
+            Done
+          </button>
+        </DialogContent>
+      </Dialog>
+
+      {/* Product Modal */}
+      <Dialog open={open && !showThankYou} onOpenChange={onOpenChange}>
       <DialogContent 
         className="glass !max-w-[100vw] !w-[100vw] md:!max-w-[98vw] md:!w-[98vw] !h-[100dvh] md:!h-auto !top-0 md:!top-[50%] !left-0 md:!left-[50%] !translate-x-0 md:!translate-x-[-50%] !translate-y-0 md:!translate-y-[-50%] !rounded-none md:!rounded-lg p-0 !overflow-y-auto md:overflow-hidden [&>button]:text-[#f9abb9] md:[&>button]:text-white [&>button]:hover:text-[#f9abb9]/80 md:[&>button]:hover:text-white/80 [&>button]:glass [&>button]:rounded-full [&>button]:w-10 [&>button]:h-10 [&>button]:flex [&>button]:items-center [&>button]:justify-center [&>button]:border [&>button]:border-[#f9abb9]/30 md:[&>button]:border-white/20 [&>button]:bg-[#f9abb9]/20 md:[&>button]:bg-[#f9abb9]/10 [&>button]:backdrop-blur-xl [&>button]:!fixed [&>button]:md:!absolute [&>button]:!top-4 [&>button]:!right-4 [&>button]:!z-50" 
         onOpenAutoFocus={(e) => e.preventDefault()}
@@ -289,7 +318,7 @@ export function ProductModal({ product, open, onOpenChange }: ProductModalProps)
                 <label htmlFor="dateDesired" className="block text-sm font-medium text-white/80 mb-2">
                   Date Desired
                 </label>
-                <Popover>
+                <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
                   <PopoverTrigger asChild>
                     <button
                       type="button"
@@ -315,7 +344,13 @@ export function ProductModal({ product, open, onOpenChange }: ProductModalProps)
                     <Calendar
                       mode="single"
                       selected={formData.dateDesired}
-                      onSelect={(date) => setFormData({ ...formData, dateDesired: date })}
+                      onSelect={(date) => {
+                        setFormData({ ...formData, dateDesired: date })
+                        // Close the popover when a date is selected
+                        if (date) {
+                          setDatePickerOpen(false)
+                        }
+                      }}
                       disabled={(date) => {
                         const today = new Date()
                         today.setHours(0, 0, 0, 0)
@@ -339,6 +374,7 @@ export function ProductModal({ product, open, onOpenChange }: ProductModalProps)
         </div>
       </DialogContent>
     </Dialog>
+    </>
   )
 }
 
