@@ -45,6 +45,38 @@ export const products: Product[] = [
     category: "hydrangeas",
     featured: true,
   },
+  {
+    id: "5",
+    title: "150 Powder Pink Roses",
+    price: "$549",
+    description: "A cloud-like presentation of 150 powder pink roses, meticulously hand-arranged for maximum volume, depth, and romance.",
+    image: "/IMG_1344.png",
+    category: "roses",
+  },
+  {
+    id: "6",
+    title: "Mixed Hydrangea Box",
+    price: "$299",
+    description: "Elegant powder pink and alabaster hydrangeas overflowing from a round blush hat box, finished with cascading satin ribbons.",
+    image: "/IMG_1329.png",
+    category: "hydrangeas",
+  },
+  {
+    id: "7",
+    title: "Pink & White Peonies Bouquet",
+    price: "$250",
+    description: "A lush hand-tied bouquet of alternating powder pink and soft white peonies, wrapped in blush paper with trailing ribbons.",
+    image: "/IMG_1351.png",
+    category: "peonies",
+  },
+  {
+    id: "8",
+    title: "Baby Pink & White Roses",
+    price: "$199",
+    description: "A romantic cluster of baby pink and creamy white roses gathered in a modern wrap for effortless gifting.",
+    image: "/IMG_4705.png",
+    category: "roses",
+  },
 ]
 
 // Helper functions
