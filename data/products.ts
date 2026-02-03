@@ -52,6 +52,7 @@ export const products: Product[] = [
     description: "A cloud-like presentation of 150 powder pink roses, meticulously hand-arranged for maximum volume, depth, and romance.",
     image: "/IMG_1344.png",
     category: "roses",
+    featured: true,
   },
   {
     id: "6",
@@ -60,6 +61,7 @@ export const products: Product[] = [
     description: "Elegant powder pink and alabaster hydrangeas overflowing from a round blush hat box, finished with cascading satin ribbons.",
     image: "/IMG_1329.png",
     category: "hydrangeas",
+    featured: true,
   },
   {
     id: "7",
@@ -68,6 +70,7 @@ export const products: Product[] = [
     description: "A lush hand-tied bouquet of alternating powder pink and soft white peonies, wrapped in blush paper with trailing ribbons.",
     image: "/IMG_1351.png",
     category: "peonies",
+    featured: true,
   },
   {
     id: "8",
@@ -76,6 +79,7 @@ export const products: Product[] = [
     description: "A romantic cluster of baby pink and creamy white roses gathered in a modern wrap for effortless gifting.",
     image: "/IMG_4705.png",
     category: "roses",
+    featured: true,
   },
 ]
 
