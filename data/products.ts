@@ -90,6 +90,33 @@ export const products: Product[] = [
     category: "hydrangeas",
     featured: true,
   },
+  {
+    id: "10",
+    title: "Mixed White Bouquet",
+    price: "$199",
+    description: "Pure white roses, peonies, and hydrangeas gathered into an abundant bouquet wrapped in layers of blush tissue.",
+    image: "/IMG_1350.jpg",
+    category: "hydrangeas",
+    featured: true,
+  },
+  {
+    id: "11",
+    title: "Mixed White Bouquet",
+    price: "$199",
+    description: "Pure white roses, peonies, and hydrangeas gathered into an abundant bouquet wrapped in layers of blush tissue.",
+    image: "/IMG_1350.jpg",
+    category: "roses",
+    featured: true,
+  },
+  {
+    id: "12",
+    title: "Mixed White Bouquet",
+    price: "$199",
+    description: "Pure white roses, peonies, and hydrangeas gathered into an abundant bouquet wrapped in layers of blush tissue.",
+    image: "/IMG_1350.jpg",
+    category: "peonies",
+    featured: true,
+  },
 ]
 
 // Helper functions
