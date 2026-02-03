@@ -71,9 +71,13 @@ export function Navbar() {
                   </Link>
                 )
               })}
-              <button className="bg-[#f9abb9] text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-[#f9abb9]/90 transition-colors">
+              <Link
+                href="/contact"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="bg-[#f9abb9] text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-[#f9abb9]/90 transition-colors text-center"
+              >
                 Contact Us
-              </button>
+              </Link>
             </div>
           </motion.div>
         </>
@@ -114,9 +118,12 @@ export function Navbar() {
               </Link>
             )
           })}
-          <button className="bg-[#f9abb9] text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#f9abb9]/90 transition-colors">
+          <Link
+            href="/contact"
+            className="bg-[#f9abb9] text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#f9abb9]/90 transition-colors"
+          >
             Contact Us
-          </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Toggle */}
