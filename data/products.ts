@@ -126,6 +126,24 @@ export const products: Product[] = [
     category: "hydrangeas",
     featured: true,
   },
+  {
+    id: "14",
+    title: "Blush Hydrangea & Rose Hat Box",
+    price: "$199",
+    description: "A round blush hat box filled with alternating blush hydrangeas and clustered roses for a grand, romantic gesture.",
+    image: "/IMG_4736.png",
+    category: "hydrangeas",
+    featured: true,
+  },
+  {
+    id: "15",
+    title: "Blush Hydrangea & Rose Hat Box",
+    price: "$199",
+    description: "A round blush hat box filled with alternating blush hydrangeas and clustered roses for a grand, romantic gesture.",
+    image: "/IMG_4736.png",
+    category: "roses",
+    featured: true,
+  },
 ]
 
 // Helper functions
