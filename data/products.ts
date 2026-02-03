@@ -117,6 +117,15 @@ export const products: Product[] = [
     category: "peonies",
     featured: true,
   },
+  {
+    id: "13",
+    title: "Small Blue and Pink Hydrangeas",
+    price: "$89.99",
+    description: "A petite hat box overflowing with soft blue and pastel pink hydrangea blooms for an effortless gift.",
+    image: "/IMG_4734.jpeg",
+    category: "hydrangeas",
+    featured: true,
+  },
 ]
 
 // Helper functions
