@@ -133,6 +133,14 @@ export const products: Product[] = [
     image: "/IMG_4736.png",
     category: "roses",
   },
+  {
+    id: "16",
+    title: "150 Rose Box",
+    price: "$499.99",
+    description: "A luxury velvet hat box packed with 150 hand-selected roses and wrapped with cascading satin ribbons.",
+    image: "/IMG_1331.png",
+    category: "roses",
+  },
 ]
 
 // Helper functions
