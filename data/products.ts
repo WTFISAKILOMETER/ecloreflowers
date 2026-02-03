@@ -81,6 +81,15 @@ export const products: Product[] = [
     category: "roses",
     featured: true,
   },
+  {
+    id: "9",
+    title: "White Hydrangeas",
+    price: "$199",
+    description: "A voluminous arrangement of pristine white hydrangeas presented in an oversized blush hat box with cascading ribbons.",
+    image: "/IMG_1323.jpg",
+    category: "hydrangeas",
+    featured: true,
+  },
 ]
 
 // Helper functions
