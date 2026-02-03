@@ -141,6 +141,14 @@ export const products: Product[] = [
     image: "/IMG_1331.png",
     category: "roses",
   },
+  {
+    id: "17",
+    title: "Basket of Roses",
+    price: "$599.99",
+    description: "An overflowing basket of pastel-toned roses styled with trailing ribbons for grand celebrations.",
+    image: "/IMG_4744.png",
+    category: "roses",
+  },
 ]
 
 // Helper functions
