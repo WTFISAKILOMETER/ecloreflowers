@@ -17,15 +17,21 @@ import { CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
-import type { Product } from "@/data/products"
-
-interface ProductModalProps {
-  product: Product | null
-  open: boolean
-  onOpenChange: (open: boolean) => void
+export interface ProductDetails {
+  title: string
+  price: string
+  description: string
+  image: string
 }
 
-export function ProductModal({ product, open, onOpenChange }: ProductModalProps) {
+interface ProductModalProps {
+  product: ProductDetails | null
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  variant?: "flowers" | "cars"
+}
+
+export function ProductModal({ product, open, onOpenChange, variant = "flowers" }: ProductModalProps) {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -188,6 +194,8 @@ export function ProductModal({ product, open, onOpenChange }: ProductModalProps)
 
   if (!product) return null
 
+  const isCars = variant === "cars"
+
   return (
     <>
       {/* Thank You Modal */}
@@ -222,7 +230,12 @@ export function ProductModal({ product, open, onOpenChange }: ProductModalProps)
       {/* Product Modal */}
       <Dialog open={open && !showThankYou} onOpenChange={onOpenChange}>
       <DialogContent 
-        className="glass !max-w-[100vw] !w-[100vw] md:!max-w-[98vw] md:!w-[98vw] !h-[100dvh] md:!h-auto !top-0 md:!top-[50%] !left-0 md:!left-[50%] !translate-x-0 md:!translate-x-[-50%] !translate-y-0 md:!translate-y-[-50%] !rounded-none md:!rounded-lg p-0 !overflow-y-auto md:overflow-hidden [&>button]:text-[#f9abb9] md:[&>button]:text-white [&>button]:hover:text-[#f9abb9]/80 md:[&>button]:hover:text-white/80 [&>button]:glass [&>button]:rounded-full [&>button]:w-10 [&>button]:h-10 [&>button]:flex [&>button]:items-center [&>button]:justify-center [&>button]:border [&>button]:border-[#f9abb9]/30 md:[&>button]:border-white/20 [&>button]:bg-[#f9abb9]/20 md:[&>button]:bg-[#f9abb9]/10 [&>button]:backdrop-blur-xl [&>button]:!fixed [&>button]:md:!absolute [&>button]:!top-4 [&>button]:!right-4 [&>button]:!z-50" 
+        className={cn(
+          "glass p-0 !overflow-y-auto [&>button]:text-[#f9abb9] md:[&>button]:text-white [&>button]:hover:text-[#f9abb9]/80 md:[&>button]:hover:text-white/80 [&>button]:glass [&>button]:rounded-full [&>button]:w-10 [&>button]:h-10 [&>button]:flex [&>button]:items-center [&>button]:justify-center [&>button]:border [&>button]:border-[#f9abb9]/30 md:[&>button]:border-white/20 [&>button]:bg-[#f9abb9]/20 md:[&>button]:bg-[#f9abb9]/10 [&>button]:backdrop-blur-xl [&>button]:!top-4 [&>button]:!right-4 [&>button]:!z-50",
+          isCars
+            ? "!max-w-[90vw] md:!max-w-lg !w-full !h-auto !rounded-2xl [&>button]:!absolute"
+            : "!max-w-[100vw] !w-[100vw] md:!max-w-[98vw] md:!w-[98vw] !h-[100dvh] md:!h-auto !top-0 md:!top-[50%] !left-0 md:!left-[50%] !translate-x-0 md:!translate-x-[-50%] !translate-y-0 md:!translate-y-[-50%] !rounded-none md:!rounded-lg md:overflow-hidden [&>button]:!fixed [&>button]:md:!absolute",
+        )}
         onOpenAutoFocus={(e) => e.preventDefault()}
         style={{
           WebkitOverflowScrolling: 'touch',
@@ -232,21 +245,27 @@ export function ProductModal({ product, open, onOpenChange }: ProductModalProps)
       >
         <div 
           ref={formContainerRef}
-          className="flex flex-col md:flex-row min-h-full md:h-auto"
+          className={cn(
+            "flex flex-col min-h-full md:h-auto",
+            !isCars && "md:flex-row",
+          )}
         >
-          {/* Left Side - Product Image */}
-          <div className="relative w-full md:w-1/2 h-64 md:h-auto md:min-h-[600px] flex-shrink-0">
-            <Image
-              src={product.image}
-              alt={product.title}
-              fill
-              className="object-cover rounded-t-lg md:rounded-l-lg md:rounded-t-none"
-            />
-          </div>
+          {!isCars && (
+            <div className="relative w-full md:w-1/2 h-64 md:h-auto md:min-h-[600px] flex-shrink-0">
+              <Image
+                src={product.image}
+                alt={product.title}
+                fill
+                className="object-cover rounded-t-lg md:rounded-l-lg md:rounded-t-none"
+              />
+            </div>
+          )}
 
-          {/* Right Side - Product Info and Form */}
           <div 
-            className="w-full md:w-1/2 p-6 md:p-12 flex flex-col flex-1"
+            className={cn(
+              "w-full p-6 md:p-12 flex flex-col flex-1",
+              !isCars && "md:w-1/2",
+            )}
             style={{ 
               paddingBottom: 'max(env(safe-area-inset-bottom), 2rem)'
             }}
@@ -270,7 +289,9 @@ export function ProductModal({ product, open, onOpenChange }: ProductModalProps)
 
             {/* Additional Text */}
             <p className="text-white/70 text-sm leading-relaxed mb-6">
-              We believe that every flower arrangement is unique, so please fill out your information below and we will get back to you within the hour.
+              {variant === "cars"
+                ? "Every drive and celebration is unique. Share your details below and our concierge team will reach out within the hour to finalize your experience."
+                : "We believe that every flower arrangement is unique, so please fill out your information below and we will get back to you within the hour."}
             </p>
 
             {/* Form */}
